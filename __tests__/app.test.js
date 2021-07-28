@@ -4,7 +4,7 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import Student from '../lib/Model/Model.js';
 
-describe('futurama routes', () => {
+describe('student routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
@@ -12,7 +12,7 @@ describe('futurama routes', () => {
   it('creates a student via POST', async () => {
     const student = { firstName: 'Fawn', lastName: 'Nioso', status: 'active' };
 
-    const res = await request(app).post('/students').send(student);
+    const res = await request(app).post('/api/v1/students').send(student);
 
     expect(res.body).toEqual({
       id: '1',
