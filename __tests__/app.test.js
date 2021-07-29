@@ -95,7 +95,8 @@ describe('student routes', () => {
       .delete(`/api/v1/students/${student.id}`)
       .then((res) => {
         expect(res.body).toEqual({
-          message: `The student: ${student.firstName} ${student.lastName} has been deleted from the database.`
-        }); });
+          message: 'Student has been deleted from the database'
+        });
+      });
   });
 });
