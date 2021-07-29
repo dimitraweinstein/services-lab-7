@@ -2,7 +2,7 @@ import pool from '../lib/utils/pool.js';
 import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
-import Student from '../lib/Model/Model.js';
+import Student from '../lib/model/model.js';
 
 describe('student routes', () => {
   beforeEach(() => {
