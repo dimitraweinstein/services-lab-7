@@ -62,9 +62,13 @@ describe('student routes', () => {
       status: 'active'
     });
 
-    const res = await request(app).get(`/api/v1/students/${student.id}`);
+    return request(app)
+      .get(`/api/v1/students/${student.id}`)
+      .then((res) => {
+        expect(res.body).toEqual(student);
+      });
 
-    expect(res.body).toEqual(student);
+   
   });
 
   it('updates one student by id via PUT', async () => {
