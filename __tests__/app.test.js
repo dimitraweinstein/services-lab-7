@@ -9,18 +9,22 @@ describe('student routes', () => {
     return setup(pool);
   });
 
-  it('creates a student via POST', async () => {
+  it('creates a student via POST and sends a message', async () => {
     const student = { firstName: 'Fawn', lastName: 'Nioso', status: 'active' };
 
-    const res = await request(app).post('/api/v1/students').send(student);
-
-    expect(res.body).toEqual({
-      id: '1',
-      firstName: 'Fawn',
-      lastName: 'Nioso',
-      status: 'active'
-    });
-  });
+    return request(app)
+      .post('/api/v1/students')
+      .send(student)
+      .then((res) => {
+        expect(res.body).toEqual({
+          id: '1',
+          firstName: 'Fawn',
+          lastName: 'Nioso',
+          status: 'active'
+        });
+      }
+      );
+  });  
 
   it('gets all students via GET', async () => {
     const fawn = await Student.insert({
