@@ -77,4 +77,19 @@ describe('student routes', () => {
 
     expect(res.body).toEqual({ ...student, status: 'inactive' });
   });
+
+  it('deletes one student by id via DELETE', async () => {
+    const student = await Student.insert({
+      id: '1',
+      firstName: 'Fawn',
+      lastName: 'Nioso',
+      status: 'active'
+    });
+
+    const res = await request(app).delete(`/api/v1/students/${student.id}`);
+    
+    expect(res.body).toEqual({
+      message: `The student: ${student.firstName} ${student.lastName} has been deleted from the database.`
+    });
+  });
 });
