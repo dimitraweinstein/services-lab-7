@@ -62,4 +62,19 @@ describe('student routes', () => {
 
     expect(res.body).toEqual(student);
   });
+
+  it('updates one student by id via PUT', async () => {
+    const student = await Student.insert({
+      id: '1',
+      firstName: 'Fawn',
+      lastName: 'Nioso',
+      status: 'active'
+    });
+    
+    const res = await request(app)
+      .put(`/api/v1/students/${student.id}`)
+      .send({ status: 'inactive' });
+
+    expect(res.body).toEqual({ ...student, status: 'inactive' });
+  });
 });
