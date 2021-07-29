@@ -75,11 +75,12 @@ describe('student routes', () => {
       status: 'active'
     });
     
-    const res = await request(app)
+    return request(app)
       .put(`/api/v1/students/${student.id}`)
-      .send({ status: 'inactive' });
-
-    expect(res.body).toEqual({ ...student, status: 'inactive' });
+      .send({ status: 'inactive' })
+      .then((res) => {
+        expect(res.body).toEqual({ ...student, status: 'inactive' });
+      });
   });
 
   it('deletes one student by id via DELETE', async () => {
