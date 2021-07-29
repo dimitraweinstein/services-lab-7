@@ -17,10 +17,7 @@ describe('student routes', () => {
       .send(student)
       .then((res) => {
         expect(res.body).toEqual({
-          id: '1',
-          firstName: 'Fawn',
-          lastName: 'Nioso',
-          status: 'active'
+          message: `The student: ${student.firstName} ${student.lastName} has been deleted from the database.`
         });
       }
       );
@@ -62,9 +59,13 @@ describe('student routes', () => {
       status: 'active'
     });
 
-    const res = await request(app).get(`/api/v1/students/${student.id}`);
+    return request(app)
+      .get(`/api/v1/students/${student.id}`)
+      .then((res) => {
+        expect(res.body).toEqual(student);
+      });
 
-    expect(res.body).toEqual(student);
+   
   });
 
   it('updates one student by id via PUT', async () => {
@@ -75,11 +76,12 @@ describe('student routes', () => {
       status: 'active'
     });
     
+    
     return request(app)
       .put(`/api/v1/students/${student.id}`)
       .send({ status: 'inactive' })
       .then((res) => {
-        expect(res.body).toEqual({ ...student, status: 'inactive' });
+        expect(res.body).toEqual({ message: `Student ${ student.id } record has been updated.` });
       });
   });
 
