@@ -91,10 +91,11 @@ describe('student routes', () => {
       status: 'active'
     });
 
-    const res = await request(app).delete(`/api/v1/students/${student.id}`);
-    
-    expect(res.body).toEqual({
-      message: `The student: ${student.firstName} ${student.lastName} has been deleted from the database.`
-    });
+    return request(app)
+      .delete(`/api/v1/students/${student.id}`)
+      .then((res) => {
+        expect(res.body).toEqual({
+          message: `The student: ${student.firstName} ${student.lastName} has been deleted from the database.`
+        }); });
   });
 });
