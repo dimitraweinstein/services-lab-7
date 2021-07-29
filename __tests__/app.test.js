@@ -49,4 +49,17 @@ describe('student routes', () => {
         expect(res.body).toEqual([fawn, jon, alexander]);
       });
   });
+
+  it('gets one student by id via GET', async () => {
+    const student = await Student.insert({
+      id: '1',
+      firstName: 'Fawn',
+      lastName: 'Nioso',
+      status: 'active'
+    });
+
+    const res = await request(app).get(`/api/v1/students/${student.id}`);
+
+    expect(res.body).toEqual(student);
+  });
 });
